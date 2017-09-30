@@ -1,0 +1,28 @@
+<div *ngIf="List.length > 0">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>LastName</th>
+          <th>Age</th>
+          <th>Date</th>
+          <th>Gender</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of List; let i = index">
+          <td><a routerLink="/add/{{i}}">{{item.name | capital}}</a></td>
+          <td>{{item.lastName | capital}}</td>
+          <td>{{item.age}}</td>
+          <td>{{item.date | date: 'dd/MM/yyyy'}}</td>
+          <td>{{item.gender}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="search">
+    Search: <input type="text" name="searchVal" [(ngModel)]="searchVal" /> {{List | json | search: searchVal}}
+  </div>
+</div>

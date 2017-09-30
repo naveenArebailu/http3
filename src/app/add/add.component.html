@@ -1,0 +1,64 @@
+ <form #f="ngForm" (ngSubmit)="submit(f.value,f.valid)" novalidate autocomplete="off">
+      <div class="form-group">
+        <input type="text" name="name" class="form-control" [(ngModel)]="userDetail.name" maxlength="12" minlength="4" (change)="checkChar(refName)"
+          required #refName='ngModel'>
+        <div *ngIf="refName.errors && (refName.dirty || refName.touched)" class="alert alert-danger">
+          <div [hidden]="!refName.errors.required">
+            Name is required
+          </div>
+          <div [hidden]="!refName.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>
+          <div [hidden]="!refName.errors.maxlength">
+            Name cannot be more than 12 characters long.
+          </div>
+          <div [hidden]="nameInChar" class="alert alert-danger">
+            Name should be in character
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" name="lastName" class="form-control" [(ngModel)]="userDetail.lastName" maxlength="12" minlength="4" (change)="checkChar(refLastName)"
+          required #refLastName='ngModel'>
+        <div *ngIf="refLastName.errors && (refLastName.dirty || refLastName.touched)" class="alert alert-danger">
+          <div [hidden]="!refLastName.errors.required">
+            Name is required
+          </div>
+          <div [hidden]="!refLastName.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>
+          <div [hidden]="!refLastName.errors.maxlength">
+            Name cannot be more than 12 characters long.
+          </div>
+          <div [hidden]="nameInChar" class="alert alert-danger">
+            Name should be in character
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" name="age" class="form-control" [(ngModel)]="userDetail.age" required #refage='ngModel'>
+        <div [hidden]="refage.valid || refage.pristine" class="alert alert-danger">
+          Age is required
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="date" name="date" class="form-control" [(ngModel)]="userDetail.date" required #refdate='ngModel'>
+        <div [hidden]="refdate.valid || refdate.pristine" class="alert alert-danger">
+          Date is required
+        </div>
+      </div>
+      <div class="form-group">
+        <select class="txt-box" name="gender" [(ngModel)]="userDetail.genderType" class="form-control" required #refGender='ngModel'>
+          <option [value]="userDetail.genderType" [disabled]="true">Select Option </option>
+            <option *ngFor="let gender of genderArray" [ngValue]="gender.value">
+            {{gender.value}}
+            </option>
+      </select>
+        <div [hidden]="refGender.valid || refGender.pristine" class="alert alert-danger">
+          Gender is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
